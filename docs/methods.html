@@ -1,0 +1,315 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Methods · Valor</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="O Valor acredita em _methods_ **puros** e **bem estruturados**, e ele te ajuda a criá-los, abstraindo completamente a requisição."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Methods · Valor"/><meta property="og:type" content="website"/><meta property="og:url" content="https://teemprego.com/"/><meta property="og:description" content="O Valor acredita em _methods_ **puros** e **bem estruturados**, e ele te ajuda a criá-los, abstraindo completamente a requisição."/><meta property="og:image" content="https://teemprego.com/img/undraw_online.svg"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://teemprego.com/img/undraw_tweetstorm.svg"/><link rel="shortcut icon" href="/img/v.svg"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/vs2015.min.css"/><link rel="alternate" type="application/atom+xml" href="https://teemprego.com/blog/atom.xml" title="Valor Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://teemprego.com/blog/feed.xml" title="Valor Blog RSS Feed"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/v.svg" alt="Valor"/><h2 class="headerTitleWithLogo">Valor</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/getting-started" target="_self">Docs</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Estrutura</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Iniciando</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/getting-started">Iniciando</a></li><li class="navListItem"><a class="navItem" href="/docs/why-valor">Por que o Valor?</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Estrutura</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/structure">Estrutura</a></li><li class="navListItem"><a class="navItem" href="/docs/module-alias">Alias</a></li><li class="navListItem"><a class="navItem" href="/docs/modules">Módulos</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/methods">Methods</a></li><li class="navListItem"><a class="navItem" href="/docs/middlewares">Middlewares</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Avançado</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/module-register-service">Module Register Service</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">CLI</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/cli-getting-started">Iniciando com a CLI</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Methods</h1></header><article><div><span><p>O Valor acredita em <em>methods</em> <strong>puros</strong> e <strong>bem estruturados</strong>, e ele te ajuda a criá-los, abstraindo completamente a requisição.</p>
+<p>Um <em>method</em> contém tudo que vai ser executado em determinado <em>endpoint</em>, abstraindo informações de requisições.</p>
+<p>Essa mágica é possível por conta do serviço <strong>Module Register Service</strong>, que consegue referenciar tudo que a gente precisa diretamente do <em>endpoint</em> para o <em>method</em>.</p>
+<p><span style="border: 1px dashed; display: inline-block; padding: 7px 10px;">
+<strong>Observação:</strong> &quot;<em>method</em>&quot; é apenas o nome dado à responsabilidade do arquivo. Falando em código, o <em>method</em> é uma <strong>classe</strong> que herda proriedades de outra classe padrão.
+</span></p>
+<pre><code class="hljs css language-typescript"><span class="hljs-keyword">import</span> { ModuleResponse } <span class="hljs-keyword">from</span> <span class="hljs-string">'@interfaces'</span>
+<span class="hljs-keyword">import</span> { ControllerMethod } <span class="hljs-keyword">from</span> <span class="hljs-string">'@classes'</span>
+
+<span class="hljs-keyword">import</span> UserModel <span class="hljs-keyword">from</span> <span class="hljs-string">'../User.schema'</span>
+<span class="hljs-keyword">import</span> { User } <span class="hljs-keyword">from</span> <span class="hljs-string">'../User.interface'</span>
+
+<span class="hljs-comment">// precisa herdar da classe ControllerMethod</span>
+<span class="hljs-keyword">class</span> List <span class="hljs-keyword">extends</span> ControllerMethod {
+  <span class="hljs-keyword">private</span> users: User[]
+
+  <span class="hljs-comment">// precisa de ter uma função handle</span>
+  <span class="hljs-keyword">public</span> handle = <span class="hljs-keyword">async</span> (): <span class="hljs-built_in">Promise</span>&lt;ModuleResponse&gt; =&gt;
+    <span class="hljs-keyword">this</span>
+      .getUsers() <span class="hljs-comment">// executa a função getUsers</span>
+      .then(<span class="hljs-keyword">this</span>.respond) <span class="hljs-comment">// finaliza a request com o status e data</span>
+
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">async</span> getUsers (): <span class="hljs-built_in">Promise</span>&lt;<span class="hljs-built_in">void</span>&gt; {
+    <span class="hljs-keyword">this</span>.users = <span class="hljs-keyword">await</span> UserModel.find()
+
+    <span class="hljs-keyword">this</span>.status = <span class="hljs-number">200</span> <span class="hljs-comment">// stateful response code</span>
+    <span class="hljs-keyword">this</span>.data = <span class="hljs-keyword">this</span>.users <span class="hljs-comment">// stateful response code</span>
+  }
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> list = <span class="hljs-keyword">new</span> List()
+</code></pre>
+<p>Parece confuso? <strong>Relaxa</strong>! É mais simples do que você pensa :)</p>
+<h2><a class="anchor" aria-hidden="true" id="controllermethod"></a><a href="#controllermethod" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>ControllerMethod</h2>
+<p>Deve ter notado que o <em>method</em> sempre extende de uma classe <code>ControllerMethod</code>. Ela é apenas uma camada com funções e propriedades padrão.</p>
+<h3><a class="anchor" aria-hidden="true" id="retorno"></a><a href="#retorno" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Retorno</h3>
+<p>A função <code>handle</code> sempre irá retornar o uma <em>Promise</em> do tipo <code>ModuleResponse</code>, que é o formato da resposta enviado pela função <code>respond</code> da classe <code>ControllerMethod</code>.</p>
+<pre><code class="hljs css language-typescript"><span class="hljs-keyword">class</span> Greet <span class="hljs-keyword">extends</span> ControllerMethod {
+  <span class="hljs-keyword">public</span> handle = <span class="hljs-keyword">async</span> (): <span class="hljs-built_in">Promise</span>&lt;ModuleResponse&gt; =&gt;
+    <span class="hljs-keyword">this</span>.status = <span class="hljs-number">200</span>
+    <span class="hljs-keyword">this</span>.data = { message: <span class="hljs-string">'Hi, there!'</span> }
+
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.respond
+}
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="status-data"></a><a href="#status-data" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>status</code> &amp; <code>data</code></h3>
+<p>Você dever ter reparado que, no exemplo acima, que nós setamos o <code>this.status</code> e <code>this.data</code> dentro da função <code>getUsers</code>.</p>
+<p>Essas propriedades são herdadas do <code>ControllerMethod</code>, e elas dizem qual o status e corpo da resposta que vamos enviar.</p>
+<p>No caso acima, definimos que:</p>
+<ul>
+<li><code>status</code> recebe <code>200</code>; e</li>
+<li><code>data</code> recebe a nossa lista de usuários (retornado do <code>UserModel.find()</code>).</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" id="respond"></a><a href="#respond" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>respond</code></h3>
+<p>Se der uma olhadinha no código acima, após o término da função <code>getUsers</code>, invocamos o a função <code>respond</code>. Essa função também é herdada da classe <code>ControllerMethod</code>.</p>
+<p>Basicamente, o que ele faz é retornar nosso <code>status</code> e <code>data</code> na estrutura esperada pelo <strong>Module Register Service</strong>.</p>
+<p>Então, <strong>certifique-se de sempre setar o valor de <code>status</code> e <code>data</code> antes de retornar com <code>respond</code></strong>.</p>
+<h3><a class="anchor" aria-hidden="true" id="auth"></a><a href="#auth" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>Auth</code></h3>
+<p>A classe <code>ControllerMethod</code> também possui uma proriedade <code>Auth</code>. Ela é apenas uma instância do serviço de autenticação.</p>
+<pre><code class="hljs css language-typescript"><span class="hljs-keyword">private</span> compareCredentials = <span class="hljs-keyword">async</span> (): <span class="hljs-built_in">Promise</span>&lt;<span class="hljs-built_in">void</span>&gt; =&gt; {
+  <span class="hljs-comment">// recupera senhas do estado da classe</span>
+  <span class="hljs-keyword">const</span> toCompare = [
+    <span class="hljs-keyword">this</span>.credentials.password,
+    <span class="hljs-keyword">this</span>.user.password
+  ]
+
+  <span class="hljs-keyword">const</span> match = <span class="hljs-keyword">await</span> <span class="hljs-keyword">this</span>.Auth.comparePassword(...toCompare)
+
+  <span class="hljs-keyword">if</span> (!match) {
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-keyword">this</span>.HttpException(<span class="hljs-number">400</span>, <span class="hljs-string">'invalid credentials'</span>)
+  }
+}
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="httpexception"></a><a href="#httpexception" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>HttpException</code></h3>
+<p>Como já deve ter visto no spoiler acima, existe, também, uma referência à <code>HttpException</code>.</p>
+<p>Caso queira interceptar sua requisição, por algum motivo, apenas lance um <code>HttpException</code> com status, mensagem e, se quiser, um corpo.</p>
+<p>O método HttpExceptio espera 3 parâmetros:</p>
+<ul>
+<li><code>status</code> código do status que será enviado</li>
+<li><code>message</code> mensagem descrevendo o erro brevemente</li>
+<li><code>data</code> corpo do erro, com mais detalhes</li>
+</ul>
+<p>Geralmente, enviar o <code>status</code> e <code>message</code> é o suficiente.</p>
+<p>Importante entender que se você lançar uma <code>HttpException</code>, a execução do seu método será automaticamente interrompida e absolutamente nada após aquilo será enviado.</p>
+<pre><code class="hljs css language-typescript"><span class="hljs-keyword">private</span> trhowErrorWithoutAnyReason = <span class="hljs-keyword">async</span> (): <span class="hljs-built_in">Promise</span>&lt;<span class="hljs-built_in">void</span>&gt; =&gt; {
+  <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-keyword">this</span>.HttpException(<span class="hljs-number">400</span>, <span class="hljs-string">'invalid credentials'</span>)
+
+  <span class="hljs-comment">// código inacessível</span>
+  <span class="hljs-keyword">this</span>
+    .doSomethingElse()
+    .then(<span class="hljs-keyword">this</span>.doAnotherCoolThing)
+}
+</code></pre>
+<p><strong>Importante:</strong> Sempre lance uma <code>HttpException</code> ao e nunca um <code>Error</code>, pois o formato da <code>HttpExeption</code> é feito sob medida para o <strong>Module Register Service</strong>.</p>
+<h3><a class="anchor" aria-hidden="true" id="funcão-handle"></a><a href="#funcão-handle" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Função <code>handle</code></h3>
+<p>Você precisa saber que absolutamente tudo que for relacionado à <em>methods</em> e <em>endpoints</em> é gerenciado pelo <strong>Module Register Service</strong>. E como toda a conexão é abstraída por ele, precisamos seguir alguns padrões para que isso possa ser feito de forma automatizada.</p>
+<p>Todos os <em>methods</em> são iniciados por meio do função <code>handle</code>.</p>
+<p>Essa função recebe os parâmetros passados pelo <strong>Module Register Service</strong> na hora de registrar o <em>endpoint</em>.</p>
+<p>Ou seja: <strong>a requisição irá inciar e finalizar nesse método</strong>, independente de quantos métodos forem executados no meio do caminho.</p>
+<p>O método handle não deve conter muita lógica, ele apenas serve para injetar os parâmetros da requisição no estado da classe, iniciar e retornar a corrente de promises.</p>
+<p>Isso proporciona um desenvolvimento mais limpo, padronizado e de fácil manutenção.</p>
+<h2><a class="anchor" aria-hidden="true" id="boas-praticas"></a><a href="#boas-praticas" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Boas práticas</h2>
+<p>O Valor deixa você no controle de tudo, mas te recomenda a realizar as coisas de forma padronizada. Se você seguir o padrão, vai ser muito mais fácil de econtrar ajuda e vai evitar alguns erros que você mesmo vai ter que arrumar, caso fuja muito da estrutura.</p>
+<h3><a class="anchor" aria-hidden="true" id="funcão-handle-1"></a><a href="#funcão-handle-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Função <code>handle</code></h3>
+<p>Tome como verdade que a função <code>handle</code>:</p>
+<ul>
+<li>Deverá inserir os parâmetros na classe;</li>
+<li>Não deverá conter lógica, apenas definir a corrente de promises;</li>
+<li>Retorna uma corrente de promises com cada etapa do método;</li>
+<li>Deverá retornar com um status e corpo.</li>
+</ul>
+<p>Uma <strong>boa função <code>handle</code></strong>:</p>
+<pre><code class="hljs css language-typescript"><span class="hljs-keyword">public</span> handle = <span class="hljs-keyword">async</span> (credentials: Credentials): <span class="hljs-built_in">Promise</span>&lt;ModuleResponse&gt; =&gt; {
+  <span class="hljs-keyword">this</span>.credentials = credentials
+
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>
+    .validateInput()
+    .then(<span class="hljs-keyword">this</span>.findUser)
+    .then(<span class="hljs-keyword">this</span>.compareCredentials)
+    .then(<span class="hljs-keyword">this</span>.generateToken)
+    .then(<span class="hljs-keyword">this</span>.respond)
+}
+</code></pre>
+<p>Uma <strong>má função <code>handle</code></strong>:</p>
+<pre><code class="hljs css language-typescript"><span class="hljs-keyword">public</span> handle = <span class="hljs-keyword">async</span> (credentials: Credentials): <span class="hljs-built_in">Promise</span>&lt;ModuleResponse&gt; =&gt; {
+  <span class="hljs-keyword">this</span>.credentials = credentials
+
+  <span class="hljs-keyword">const</span> inputIsValid = <span class="hljs-keyword">await</span> <span class="hljs-keyword">this</span>.validateInput()
+  <span class="hljs-keyword">if</span> (!inputIsValid) {
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-keyword">this</span>.HttpException(<span class="hljs-number">400</span>, <span class="hljs-string">'invalid credentials'</span>)
+  }
+
+  <span class="hljs-keyword">const</span> user = <span class="hljs-keyword">await</span> <span class="hljs-keyword">this</span>.findUser()
+  <span class="hljs-keyword">if</span> (!user) {
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-keyword">this</span>.HttpException(<span class="hljs-number">400</span>, <span class="hljs-string">'invalid user'</span>)
+  }
+
+  <span class="hljs-keyword">const</span> toCompare = [credentials.password, user.password]
+  <span class="hljs-keyword">const</span> credentialsAreValid = <span class="hljs-keyword">await</span> <span class="hljs-keyword">this</span>.compareCredentials(...toCompare)
+  <span class="hljs-keyword">if</span>(!credentialsAreValid) {
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-keyword">this</span>.HttpException(<span class="hljs-number">400</span>, <span class="hljs-string">'invalid credentials'</span>)
+  }
+
+  <span class="hljs-keyword">const</span> token = Token.encode(user)
+
+  <span class="hljs-keyword">this</span>.status = <span class="hljs-number">200</span>
+  <span class="hljs-keyword">this</span>.data = { token }
+
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.respond()
+}
+</code></pre>
+<p>Conseguiu perceber que a primeira função, que é segregada, é muito mais fácil de modificar, testar e debugar? É muito melhor desse jeito! :)</p>
+<h2><a class="anchor" aria-hidden="true" id="exemplo-de-metodo"></a><a href="#exemplo-de-metodo" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Exemplo de método</h2>
+<p>Abaixo um exemplo de método completo e documentado.</p>
+<pre><code class="hljs css language-typescript"><span class="hljs-keyword">import</span> { validateOrReject, IsString, IsEmail } <span class="hljs-keyword">from</span> <span class="hljs-string">'class-validator'</span>
+
+<span class="hljs-keyword">import</span> { ModuleResponse, Credentials } <span class="hljs-keyword">from</span> <span class="hljs-string">'@interfaces'</span>
+<span class="hljs-keyword">import</span> { ControllerMethod } <span class="hljs-keyword">from</span> <span class="hljs-string">'@classes'</span>
+<span class="hljs-keyword">import</span> TokenService <span class="hljs-keyword">from</span> <span class="hljs-string">'@services/Token.service'</span>
+
+<span class="hljs-keyword">import</span> { User } <span class="hljs-keyword">from</span> <span class="hljs-string">'../User.interface'</span>
+<span class="hljs-keyword">import</span> UserModel <span class="hljs-keyword">from</span> <span class="hljs-string">'../User.schema'</span>
+
+<span class="hljs-comment">// classe de validacão de dados inputados</span>
+<span class="hljs-keyword">class</span> InputValidation {
+  <span class="hljs-meta">@IsString</span>()
+  <span class="hljs-keyword">public</span> password: <span class="hljs-built_in">string</span>
+
+  <span class="hljs-meta">@IsEmail</span>()
+  <span class="hljs-keyword">public</span> email: <span class="hljs-built_in">string</span>
+}
+
+
+<span class="hljs-keyword">class</span> Login <span class="hljs-keyword">extends</span> ControllerMethod {
+  <span class="hljs-comment">// declarando as proriedades e suas interfaces</span>
+  <span class="hljs-keyword">private</span> user: User
+  <span class="hljs-keyword">private</span> credentials: Credentials
+
+  <span class="hljs-comment">// recebe os parâmetros do endpoint</span>
+  <span class="hljs-keyword">public</span> handle = <span class="hljs-keyword">async</span> (credentials: Credentials): <span class="hljs-built_in">Promise</span>&lt;ModuleResponse&gt; =&gt; {
+    <span class="hljs-comment">// injeta as credenciais no estado da classe</span>
+    <span class="hljs-comment">// agora ela é acessível por todos os outros métodos</span>
+    <span class="hljs-keyword">this</span>.credentials = credentials
+
+    <span class="hljs-comment">// inicia a cadeia de promises</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>
+      .validateInput() <span class="hljs-comment">// primeiro, validamos o input</span>
+      .then(<span class="hljs-keyword">this</span>.findUser) <span class="hljs-comment">// depois recuperamos o usuário no banco</span>
+      .then(<span class="hljs-keyword">this</span>.compareCredentials) <span class="hljs-comment">// comparamos as credenciais</span>
+      .then(<span class="hljs-keyword">this</span>.generateToken) <span class="hljs-comment">// geramos um token</span>
+      .then(<span class="hljs-keyword">this</span>.respond) <span class="hljs-comment">// devolvemos a resposta com o token</span>
+  }
+
+  <span class="hljs-comment">// valida os inputs usando o class-validator</span>
+  <span class="hljs-keyword">private</span> validateInput = <span class="hljs-keyword">async</span> (): <span class="hljs-built_in">Promise</span>&lt;<span class="hljs-built_in">void</span>&gt; =&gt; {
+    <span class="hljs-keyword">try</span> {
+      <span class="hljs-comment">// tentamos validar nosso input</span>
+      <span class="hljs-keyword">const</span> validation = <span class="hljs-keyword">new</span> InputValidation()
+      validation.email = <span class="hljs-keyword">this</span>.credentials.email
+      validation.password = <span class="hljs-keyword">this</span>.credentials.password
+      <span class="hljs-keyword">await</span> validateOrReject(validation)
+    } <span class="hljs-keyword">catch</span> (error) {
+      <span class="hljs-comment">// caso a validação seja rejeitada, lançamos a HttpException</span>
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-keyword">this</span>.HttpException(<span class="hljs-number">400</span>, <span class="hljs-string">'invalid inputs'</span>)
+    }
+  }
+
+  <span class="hljs-comment">// recupera o usuário</span>
+  <span class="hljs-keyword">private</span> findUser = <span class="hljs-keyword">async</span> (): <span class="hljs-built_in">Promise</span>&lt;<span class="hljs-built_in">void</span>&gt; =&gt; {
+    <span class="hljs-comment">// buscamos o usuário na base de dados</span>
+    <span class="hljs-keyword">const</span> user = <span class="hljs-keyword">await</span> UserModel
+      .findOne({
+        email: <span class="hljs-keyword">this</span>.credentials.email
+      })
+      <span class="hljs-comment">// recuperar, também, a senha, que foi desabilitada de vir por padrão</span>
+      .select(<span class="hljs-string">'+password'</span>)
+
+    <span class="hljs-keyword">if</span> (!user) {
+      <span class="hljs-comment">// caso o usuário não exista, lançamos a HttpException</span>
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-keyword">this</span>.HttpException(<span class="hljs-number">400</span>, <span class="hljs-string">'user does\'t exists'</span>)
+    }
+
+    <span class="hljs-comment">// já que o usuário existe, injetamos ele no estado da classe</span>
+    <span class="hljs-keyword">this</span>.user = user
+  }
+
+  <span class="hljs-comment">// verifica se a senha está correta</span>
+  <span class="hljs-keyword">private</span> compareCredentials = <span class="hljs-keyword">async</span> (): <span class="hljs-built_in">Promise</span>&lt;<span class="hljs-built_in">void</span>&gt; =&gt; {
+    <span class="hljs-keyword">const</span> toCompare = [
+      <span class="hljs-keyword">this</span>.credentials.password,
+      <span class="hljs-keyword">this</span>.user.password
+    ]
+
+    <span class="hljs-comment">// comparamos as senhas (booleano)</span>
+    <span class="hljs-keyword">const</span> match = <span class="hljs-keyword">await</span> <span class="hljs-keyword">this</span>.Auth.comparePassword(...toCompare)
+
+    <span class="hljs-keyword">if</span> (!match) {
+      <span class="hljs-comment">// se não forem iguais, lança a HttpException</span>
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-keyword">this</span>.HttpException(<span class="hljs-number">400</span>, <span class="hljs-string">'invalid credentials'</span>)
+    }
+  }
+
+  <span class="hljs-comment">// gera o token</span>
+  <span class="hljs-keyword">private</span> generateToken = (): <span class="hljs-function"><span class="hljs-params">void</span> =&gt;</span> {
+    <span class="hljs-keyword">const</span> token = TokenService.encode(<span class="hljs-keyword">this</span>.user)
+
+    <span class="hljs-comment">// define o código de status da resposta</span>
+    <span class="hljs-keyword">this</span>.status = <span class="hljs-number">200</span>
+
+    <span class="hljs-comment">// define o corpo da resposta (nosso token)</span>
+    <span class="hljs-keyword">this</span>.data = { token }
+
+    <span class="hljs-comment">// como esse é o último método, a função respond será executada (veja no handle)</span>
+  }
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> login = <span class="hljs-keyword">new</span> Login()
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/modules"><span class="arrow-prev">← </span><span>Módulos</span></a><a class="docs-next button" href="/docs/middlewares"><span>Middlewares</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#controllermethod">ControllerMethod</a><ul class="toc-headings"><li><a href="#retorno">Retorno</a></li><li><a href="#status-data"><code>status</code> &amp; <code>data</code></a></li><li><a href="#respond"><code>respond</code></a></li><li><a href="#auth"><code>Auth</code></a></li><li><a href="#httpexception"><code>HttpException</code></a></li><li><a href="#funcão-handle">Função <code>handle</code></a></li></ul></li><li><a href="#boas-praticas">Boas práticas</a><ul class="toc-headings"><li><a href="#funcão-handle-1">Função <code>handle</code></a></li></ul></li><li><a href="#exemplo-de-metodo">Exemplo de método</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/v.svg" alt="Valor" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/getting-started">Iniciando</a><a href="/docs/why-valor">Por que usar o valor?</a><a href="/docs/cli-getting-started">CLI</a></div><div><h5>Comunidade</h5><a href="/users.html">Quem usa Valor?</a><a href="https://stackoverflow.com/questions/tagged/" target="_blank" rel="noreferrer noopener">Stack Overflow</a><a href="https://discordapp.com/">Project Chat</a><a href="https://twitter.com/" target="_blank" rel="noreferrer noopener">Twitter</a></div><div><h5>More</h5><a href="https://github.com/te-emprego/valor">GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><a href="https://github.com/te-emprego" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/img/te_emprego.svg" alt="Facebook Open Source" width="170" height="45"/></a><section class="copyright">Copyright © 2019 Te Emprego</section></footer></div></body></html>
