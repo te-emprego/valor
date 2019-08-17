@@ -1,4 +1,2 @@
-* linguist-vendored
-*.js linguist-vendored=false
-*.ts linguist-vendored=false
-Dockerfile linguist-vendored=false
+docs/* linguist-vendor
+website/* linguist-vendor
