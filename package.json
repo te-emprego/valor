@@ -1,0 +1,74 @@
+{
+  "name": "valor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/server.ts",
+    "test": "jest",
+    "build": "tsc --project tsconfig.json && tscpaths -p tsconfig.json -s ./src -o ./dist",
+    "start": "node dist/server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/cors": "^2.8.5",
+    "@types/dotenv": "^6.1.1",
+    "@types/express": "^4.17.0",
+    "@types/jest": "^24.0.15",
+    "@types/lodash": "^4.14.136",
+    "@types/mongoose": "^5.5.8",
+    "@typescript-eslint/eslint-plugin": "^1.11.0",
+    "@typescript-eslint/parser": "^1.11.0",
+    "cz-conventional-changelog": "^2.1.0",
+    "eslint": "^6.0.1",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.18.0",
+    "eslint-plugin-node": "^9.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "jest": "^24.8.0",
+    "nodemon": "^1.19.1",
+    "prettier": "^1.18.2",
+    "sucrase": "^3.10.1",
+    "ts-jest": "^24.0.2",
+    "ts-node": "^8.3.0",
+    "tscpaths": "0.0.9",
+    "typescript": "^3.5.3"
+  },
+  "dependencies": {
+    "@types/bcrypt": "^3.0.0",
+    "@types/express-rate-limit": "^3.3.0",
+    "@types/jwt-simple": "^0.5.33",
+    "@types/passport": "^1.0.0",
+    "@types/passport-google-oauth20": "^2.0.2",
+    "bcrypt": "^3.0.6",
+    "class-validator": "^0.9.1",
+    "cors": "^2.8.5",
+    "dotenv": "^8.0.0",
+    "express": "^4.17.1",
+    "express-rate-limit": "^5.0.0",
+    "handlebars": "^4.1.2",
+    "jwt-simple": "^0.5.6",
+    "lodash": "^4.17.14",
+    "module-alias": "^2.2.0",
+    "mongoose": "^5.6.4",
+    "passport": "^0.4.0",
+    "passport-google-oauth20": "^2.0.0"
+  },
+  "_moduleAliases": {
+    "@modules": "src/modules",
+    "@middlewares": "src/middlewares",
+    "@routes": "src/routes",
+    "@classes": "src/classes",
+    "@interfaces": "src/interfaces/index",
+    "@config": "src/config",
+    "@services": "src/services"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}

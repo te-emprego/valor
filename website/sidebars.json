@@ -1,0 +1,8 @@
+{
+  "docs": {
+    "Iniciando": ["getting-started", "why-valor"],
+    "Estrutura": ["structure", "module-alias", "modules", "methods", "middlewares"],
+    "Avançado": ["module-register-service"],
+    "CLI": ["cli-getting-started"]
+  }
+}

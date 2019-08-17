@@ -1,0 +1,54 @@
+/* your custom css */
+
+.post a {
+  font-weight: 600;
+}
+
+.post a:hover,
+.post a:focus {
+  text-decoration: red underline dashed;
+}
+
+.homeContainer {
+  background-color: #222;
+  color: #fff;
+}
+
+.projectTitle {
+  color: #FFF;
+}
+
+.button.light {
+  color: #fff;
+  border-color: rgba(255,255,255,.2);
+  transition: border-color .25s ease;
+}
+
+.button.light:hover,
+.button.light:focus {
+  border-color: rgba(255,255,255,1);
+  outline: none;
+}
+
+.projectLogo {
+  opacity: .1;
+}
+
+.projectTitle img {
+  width: 180px;
+}
+
+@media only screen and (min-device-width: 360px) and (max-device-width: 736px) {
+}
+
+@media only screen and (min-width: 1024px) {
+}
+
+@media only screen and (max-width: 1023px) {
+}
+
+@media only screen and (min-width: 1400px) {
+}
+
+@media only screen and (min-width: 1500px) {
+}

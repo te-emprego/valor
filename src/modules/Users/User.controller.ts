@@ -1,0 +1,6 @@
+export { create } from './methods/Create.method'
+export { login } from './methods/Login.method'
+export { list } from './methods/List.method'
+export { updateInfo } from './methods/UpdateInfo.method'
+export { find } from './methods/Find.method'
+export { deactivate } from './methods/Deactivate.mehtod'
