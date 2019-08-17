@@ -3,7 +3,7 @@
   "localized-strings": {
     "next": "Next",
     "previous": "Previous",
-    "tagline": "Boilerplate node + typescrit opinativo",
+    "tagline": "Boilerplate Node + TypeScript opinativo",
     "docs": {
       "cli-getting-started": {
         "title": "Iniciando com a CLI",
