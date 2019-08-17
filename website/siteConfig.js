@@ -14,7 +14,7 @@ const users = [
     caption: 'Te Emprego',
     // You will need to prepend the image path with your baseUrl
     // if it is not '/', like: '/test-site/img/image.jpg'.
-    image: '/img/te-emprego.svg',
+    image: '/valor/img/te-emprego.svg',
     infoLink: 'https://www.teemprego.com.br',
     pinned: true,
   },
@@ -22,7 +22,7 @@ const users = [
     caption: 'Argofruta',
     // You will need to prepend the image path with your baseUrl
     // if it is not '/', like: '/test-site/img/image.jpg'.
-    image: '/img/argo_logo.svg',
+    image: '/valor/img/argo_logo.svg',
     infoLink: 'http://www.argofruta.com',
     pinned: true,
   },
@@ -31,8 +31,8 @@ const users = [
 const siteConfig = {
   title: 'Valor', // Title for your website.
   tagline: 'Boilerplate Node + TypeScript opinativo',
-  url: 'https://teemprego.com', // Your website URL
-  baseUrl: '/', // Base URL for your project */
+  url: 'https://te-emprego.github.io', // Your website URL
+  baseUrl: '/valor/', // Base URL for your project */
   // For github.io type URLs, you would set the url and baseUrl like:
   //   url: 'https://facebook.github.io',
   //   baseUrl: '/test-site/',
