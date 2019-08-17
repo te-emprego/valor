@@ -10,6 +10,9 @@ Para começar a usar o Valor é muito simples! Basta rodar os dois comandos abai
 # clona da versão mais recente do valor no diretório myapp
 git clone https://github.com/te-emprego/valor ./myapp
 
-# pepara para o primeiro uso (remove o)
+# instala as dependencias
+npm install
+
+# pepara para o primeiro uso (remove arquivos desnecessários)
 node valor prepare
 ```

@@ -13,6 +13,7 @@ if (args.includes('prepare')) {
   rimraf.sync(dir('file'))
   rimraf.sync(dir('website'))
   rimraf.sync(dir('docs'))
+  rimraf.sync(dir('.git'))
 
   console.log('\n\nProntinho! :D')
   return;
