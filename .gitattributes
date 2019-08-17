@@ -1,2 +1,3 @@
-docs/* linguist-vendor
-website/* linguist-vendor
+docs/*      linguist-vendor
+website/*   linguist-documentation
+valor/*     linguist-vendor
