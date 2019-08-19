@@ -2,7 +2,7 @@ import { ModuleResponse } from '@interfaces'
 import { HttpException } from '@classes'
 import AuthenticationService from '@services/Authentication.service'
 
-class Method {
+class Controller {
   public status: number
   public data: object | []
   public HttpException: any
@@ -23,5 +23,5 @@ class Method {
   }
 }
 
-export { Method as ControllerMethod }
-export default Method
+export { Controller }
+export default Controller

@@ -7,7 +7,7 @@ import {
 } from 'class-validator'
 
 import { ModuleResponse } from '@interfaces'
-import { ControllerMethod } from '@classes'
+import { Controller } from '@classes'
 
 import UserModel from '../User.schema'
 import { User, Address } from '../User.interface'
@@ -37,7 +37,7 @@ interface SanitizedProps {
   address?: Address
 }
 
-class UpdateInfo extends ControllerMethod {
+class UpdateInfo extends Controller {
   private userId: string
   private newProps: User
   private user: User

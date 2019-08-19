@@ -1,7 +1,9 @@
 import { ModuleResponse } from '@interfaces'
-import { ControllerMethod } from '@classes'
+import { Controller } from '@classes'
+
 import { User, Address } from '../User.interface'
 import UserModel from '../User.schema'
+
 import { validateOrReject, IsEmail, IsString, Length, IsNumber, Min, Max } from 'class-validator'
 
 class InputValidation {
@@ -36,7 +38,7 @@ class InputValidation {
   public jobSearchingStatus
 }
 
-class Method extends ControllerMethod {
+class Create extends Controller {
   private validation: InputValidation
   private user: User
   private storedUser: User
@@ -93,4 +95,4 @@ class Method extends ControllerMethod {
   }
 }
 
-export const create = new Method()
+export const create = new Create()

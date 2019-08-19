@@ -1,6 +1,6 @@
 import passport from 'passport'
 import GoogleStrategy from '@services/strategies/Google.strategy'
-import { compare as bcryptCompare } from 'bcrypt'
+import { compare } from 'bcryptjs'
 
 class AuthenticationService {
   private passport: passport.PassportStatic
@@ -9,7 +9,7 @@ class AuthenticationService {
   public constructor () {
     this.passport = passport
     this.passport.use(GoogleStrategy)
-    this.bcryptCompare = bcryptCompare
+    this.bcryptCompare = compare
   }
 
   public google = (options: passport.AuthenticateOptions): any =>

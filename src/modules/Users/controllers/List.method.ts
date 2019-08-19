@@ -1,10 +1,10 @@
 import { ModuleResponse } from '@interfaces'
-import { ControllerMethod } from '@classes'
+import { Controller } from '@classes'
 
 import UserModel from '../User.schema'
 import { User } from '../User.interface'
 
-class List extends ControllerMethod {
+class List extends Controller {
   private users: User[]
 
   public handle = async (): Promise<ModuleResponse> =>

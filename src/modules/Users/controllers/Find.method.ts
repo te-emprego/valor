@@ -1,10 +1,10 @@
 import { ModuleResponse } from '@interfaces'
-import { ControllerMethod } from '@classes'
+import { Controller } from '@classes'
 
 import UserModel from '../User.schema'
 import { User } from '../User.interface'
 
-class Find extends ControllerMethod {
+class Find extends Controller {
   private userId: string
 
   public handle = async (userId: string): Promise<ModuleResponse> => {

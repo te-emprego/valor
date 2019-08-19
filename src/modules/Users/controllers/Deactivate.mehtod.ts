@@ -1,8 +1,8 @@
 import { ModuleResponse } from '@interfaces'
-import { ControllerMethod } from '@classes'
+import { Controller } from '@classes'
 import UserModel from '../User.schema'
 
-class Deactivate extends ControllerMethod {
+class Deactivate extends Controller {
   private userId: string
 
   public handle = async (userId: string): Promise<ModuleResponse> => {

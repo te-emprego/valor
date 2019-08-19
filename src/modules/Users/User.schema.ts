@@ -1,6 +1,7 @@
 import { Schema, model, HookNextFunction } from 'mongoose'
+import bcrypt from 'bcryptjs'
+
 import { User } from './User.interface'
-import bcrypt from 'bcrypt'
 
 export const AddressSchema = new Schema({
   country: {

@@ -1,7 +1,7 @@
 import { validateOrReject, IsString, IsEmail } from 'class-validator'
 
 import { ModuleResponse, Credentials } from '@interfaces'
-import { ControllerMethod } from '@classes'
+import { Controller } from '@classes'
 import TokenService from '@services/Token.service'
 
 import { User } from '../User.interface'
@@ -15,7 +15,7 @@ class InputValidation {
   public email: string
 }
 
-class Login extends ControllerMethod {
+class Login extends Controller {
   private user: User
   private credentials: Credentials
 
