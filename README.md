@@ -3,7 +3,7 @@
 </center>
 
 
-Framework Oficial utilizado pelo [teemprego.com.br](https://teemprego.com.br).
+Boilerplate utilizado pelo [teemprego.com.br](https://teemprego.com.br).
 
 Built on top of:
 
