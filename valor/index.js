@@ -10,8 +10,6 @@ if (args.includes('prepare')) {
 
   const dir = p => path.resolve(__dirname, '..', p)
 
-  rimraf.sync(dir('file'))
-  rimraf.sync(dir('website'))
   rimraf.sync(dir('docs'))
   rimraf.sync(dir('.git'))
 
