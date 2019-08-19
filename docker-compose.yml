@@ -13,10 +13,10 @@ services:
     volumes:
       - mongodb:/data/db
     env_file:
-      ./.env
+      ./.env.development
     ports:
       - 27017:27017
-    command: 'mongod --smallfiles --auth'
+    command: 'mongod --auth'
 
     networks:
       mongo:

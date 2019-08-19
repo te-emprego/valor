@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/server.ts",
-    "test": "jest",
+    "dev": "cross-env NODE_ENV=development nodemon src/server.ts",
+    "test": "cross-env NODE_ENV=test jest",
     "build": "tsc --project tsconfig.json && tscpaths -p tsconfig.json -s ./src -o ./dist",
-    "start": "node dist/server.js"
+    "start": "cross-env NODE_ENV=production node dist/server.js"
   },
   "author": "",
   "license": "ISC",
@@ -20,6 +20,7 @@
     "@types/mongoose": "^5.5.8",
     "@typescript-eslint/eslint-plugin": "^1.11.0",
     "@typescript-eslint/parser": "^1.11.0",
+    "cross-env": "^5.2.0",
     "cz-conventional-changelog": "^2.1.0",
     "eslint": "^6.0.1",
     "eslint-config-prettier": "^6.0.0",
