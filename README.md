@@ -5,6 +5,11 @@
 
 Boilerplate utilizado pelo [teemprego.com.br](https://teemprego.com.br).
 
+Procurando pela documentação?
+
+- [Site oficial da documentação](https://te-emprego.github.io/valor)
+- [Repositório da documentação](https://github.com/te-emprego/valor-docs)
+
 Built on top of:
 
 - express
