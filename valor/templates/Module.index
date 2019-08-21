@@ -1,9 +1,9 @@
 import ModuleRegisterService from '@services/ModuleRegister.service'
-import * as Controller from './{{module}}.controller'
-import Endpoints from './{{module}}.endpoints'
+import * as Controller from './controllers'
+import Endpoints from './{{Module}}.endpoints'
 
-const {{moduleLower}}Module = new ModuleRegisterService(Endpoints, Controller)
+const {{module}}Module = new ModuleRegisterService(Endpoints, Controller)
 
-{{moduleLower}}Module.registerEndpoints()
+{{module}}Module.registerEndpoints()
 
-export default {{moduleLower}}Module.getRoutes()
+export default {{module}}Module.getRoutes()

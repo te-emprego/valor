@@ -1,5 +1,5 @@
 import { Schema, model, HookNextFunction } from 'mongoose'
-import {{module}}Interface from './{{module}}.interface'
+import {{Module}} from './{{module}}.interface'
 import bcrypt from 'bcrypt'
 
 const $timestamps = { timestamps: true }
@@ -18,7 +18,7 @@ const {{module}}Schema = new Schema({
 }, $timestamps
 )
 
-{{module}}Schema.pre<{{module}}Interface>('save', async function (next: Function): Promise<HookNextFunction> {
+{{module}}Schema.pre<{{Module}}>('save', async function (next: Function): Promise<HookNextFunction> {
   if (this.password) {
     const hash = await bcrypt.hash(this.password, 10)
     this.password = hash
@@ -26,4 +26,4 @@ const {{module}}Schema = new Schema({
   return next()
 })
 
-export default model<{{module}}Interface>('{{module}}', {{module}}Schema)
+export default model<{{Module}}>('{{module}}', {{module}}Schema)

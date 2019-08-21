@@ -19,11 +19,11 @@ class Find extends Controller {
     const { userId } = this
 
     const user: User =
-    await UserModel
-      .findOne({ _id: userId })
-      .catch((): any => {
-        throw new this.HttpException(400, 'user not found')
-      })
+      await UserModel
+        .findOne({ _id: userId })
+        .catch((): any => {
+          throw new this.HttpException(400, 'user not found')
+        })
 
     this.status = 200
     this.data = user
