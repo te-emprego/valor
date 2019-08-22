@@ -16,8 +16,8 @@ class App {
   }
 
   public boot (): express.Application {
-    // console.clear()
-    console.log(`App starting at http://localhost:${config.app.port}`)
+    console.clear()
+    console.log(`App starting at ${config.app.protocol}://${config.app.host}:${config.app.port}`)
     return this.express
   }
 
@@ -35,10 +35,10 @@ class App {
     mongoose
       .connect(config.app.database.connectionString)
       .then((): void => {
-        console.log('connected to db')
+        console.log('Successfully connected to database.')
       })
       .catch((error): void => {
-        console.log('error during database connection')
+        console.log('Error during database connection.')
         console.log(error.message)
       })
   }

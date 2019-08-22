@@ -7,6 +7,8 @@ dotenv.config({
 
 export default {
   app: {
+    protocol: process.env.NODE_ENV === 'development' ? 'http' : process.env.PROTOCOL,
+    host: process.env.NODE_ENV === 'development' ? 'localhost' : process.env.HOSTNAME, 
     secret: process.env.SECRET,
     port: process.env.PORT || 3333,
     database: {
