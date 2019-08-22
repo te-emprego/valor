@@ -36,13 +36,13 @@ class Template {
   writeModule = async (moduleName) => {
     const filePath = path.resolve(__dirname, '../src/modules/', moduleName, this.toWritePath)
     fs.writeFileSync(filePath, this.compiledTemplate)
-    await h.printStep(`Escrito: ${this.toWritePath}`, 800)
+    await h.printStep(`Criado: ${this.toWritePath}`, 800)
   }
 
   writeGlobal = async () => {
     const filePath = path.resolve(__dirname, '../', this.toWritePath)
     fs.writeFileSync(filePath, this.compiledTemplate)
-    await h.printStep(`Escrito: ${this.toWritePath}`, 800)
+    await h.printStep(`Criado: ${this.toWritePath}`, 800)
   }
 }
 
@@ -55,7 +55,7 @@ class Template {
 async function buildStructure (moduleName, directories) {
   const p = path.resolve(__dirname, '../src/modules/', moduleName)
   fs.mkdirSync(p)
-  directories.forEach(dir => {
+  await directories.forEach(async dir => {
     fs.mkdirSync(
       path.resolve(p, dir)
     )
@@ -118,7 +118,7 @@ async function generateEnv (clear = false) {
     await h.printStep(chalk.red('Mantendo os environments antigos!'), 500)
   }
 
-  await h.printStep('Criando fila de renderização de arquivos', 1000)
+  await h.printStep('Montando fila de renderização', 1000)
   const toRender = templates.filter(template => template.shouldRender)
   const envFiles = toRender.map(file => new Template('env', null, file.file))
 
