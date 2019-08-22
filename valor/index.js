@@ -22,7 +22,7 @@ try {
   if (args.includes('generate:module')) {
     const { renderModule } = require('./templateRenderer')
 
-    const name = helpers.getParamInArguments('-n', args)
+    const name = helpers.getParamInArguments('-n', args) || helpers.getParamInArguments('generate:module', args)
     if (!name) {
       throw new Error('Missing -n (name) param')
     }

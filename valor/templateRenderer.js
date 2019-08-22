@@ -59,7 +59,7 @@ async function buildStructure (moduleName, directories) {
     fs.mkdirSync(
       path.resolve(p, dir)
     )
-    await h.printStep(`Diretório ${path.resolve(p, dir)} criado`, 200)
+    await h.printStep(`Diretório ${chalk.green(dir)} criado`, 200)
   })
 }
 
@@ -89,6 +89,7 @@ async function renderModule (name) {
 
   await buildStructure(data.Module, directoryStructure)
   await moduleFiles.forEach(async file => file.render().then(() => file.writeModule(name)))
+  await h.printFooter()
 }
 
 function fileExists (filePath) {
