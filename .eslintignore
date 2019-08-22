@@ -1,5 +1,4 @@
 *.test.ts
 dist/
 website/
-valor/*
 *.test.js

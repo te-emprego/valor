@@ -4,7 +4,7 @@ class ModuleCreator extends Method {
   module
   templates
 
-  constructor (name) {
+  constructor(name) {
     super()
 
     this.templates = {}
