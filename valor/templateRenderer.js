@@ -4,6 +4,9 @@ const fs = require('fs')
 const path = require('path')
 const hbs = require('handlebars')
 const _ = require('lodash')
+const chalk = require('chalk')
+
+const h = require('./helpers')
 
 class Template {
   /**
@@ -23,16 +26,23 @@ class Template {
     return hbs.compile(templateString)
   }
 
-  render = () => {
+  render = async () => {
     const template = this.getTemplate()
     const compiled = template(this.args)
     this.compiledTemplate = compiled
     return this
   }
 
-  write = (moduleName) => {
+  writeModule = async (moduleName) => {
     const filePath = path.resolve(__dirname, '../src/modules/', moduleName, this.toWritePath)
     fs.writeFileSync(filePath, this.compiledTemplate)
+    await h.printStep(`Escrito: ${this.toWritePath}`, 800)
+  }
+
+  writeGlobal = async () => {
+    const filePath = path.resolve(__dirname, '../', this.toWritePath)
+    fs.writeFileSync(filePath, this.compiledTemplate)
+    await h.printStep(`Escrito: ${this.toWritePath}`, 800)
   }
 }
 
@@ -42,22 +52,27 @@ class Template {
  * @param {string} moduleName
  * @param {Array<string>} directories
  */
-function buildStructure (moduleName, directories) {
+async function buildStructure (moduleName, directories) {
   const p = path.resolve(__dirname, '../src/modules/', moduleName)
   fs.mkdirSync(p)
   directories.forEach(dir => {
     fs.mkdirSync(
       path.resolve(p, dir)
     )
+    await h.printStep(`Diretório ${path.resolve(p, dir)} criado`, 200)
   })
 }
 
-function renderModule (name) {
+async function renderModule (name) {
+  await h.printHeader('Valor generate:module')
+
+  await h.printStep('Gerando variáveis de renderização', 500)
   const data = {
     module: _.camelCase(name),
     Module: _.upperFirst(_.camelCase(name))
   }
 
+  await h.printStep('Construindo os templates', 1000)
   const moduleFiles = [
     new Template('Controller', data, 'controllers/Greet.controller.ts'),
     new Template('Controller.index', data, 'controllers/index.ts'),
@@ -67,15 +82,58 @@ function renderModule (name) {
     new Template('Endpoints', data, `${data.Module}.endpoints.ts`)
   ]
 
+  await h.printStep('Preparando a estrutura do módulo', 500)
   const directoryStructure = [
     'controllers'
   ]
 
-  buildStructure(data.Module, directoryStructure)
-  moduleFiles.forEach(file => file.render().write(name))
-  console.log('Module created')
+  await buildStructure(data.Module, directoryStructure)
+  await moduleFiles.forEach(async file => file.render().then(() => file.writeModule(name)))
+}
+
+function fileExists (filePath) {
+  return fs.existsSync(path.resolve(__dirname, '../', filePath))
+}
+
+async function generateEnv (clear = false) {
+  await h.printHeader('Valor generate:env')
+  await h.printStep('Criando templates', 100)
+  let templates = [
+    {
+      file: '.env',
+      shouldRender: true
+    },
+    {
+      file: '.env.test',
+      shouldRender: true
+    }
+  ]
+
+  await h.printStep('Verificando parâmetro clear', 100)
+  if (!clear) {
+    templates.forEach(template => {
+      template.shouldRender = !fileExists(template.file)
+    })
+    await h.printStep(chalk.red('Parâmetro clear não encontrado...'))
+    await h.printStep(chalk.red('Mantendo os environments antigos!'), 500)
+  }
+
+  await h.printStep('Criando fila de renderização de arquivos', 1000)
+  const toRender = templates.filter(template => template.shouldRender)
+  const envFiles = toRender.map(file => new Template('env', null, file.file))
+
+  if (!envFiles.length) {
+    await h.printStep('Não há nada na fila para ser feito :)')
+    await h.printFooter()
+    return
+  }
+
+  await h.printStep('Escrevendo arquivos no sistema...', 500)
+  await envFiles.forEach(async file => file.render().then(() => file.writeGlobal()))
+  await h.printFooter()
 }
 
 module.exports = {
-  renderModule
+  renderModule,
+  generateEnv
 }

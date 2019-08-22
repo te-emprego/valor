@@ -29,6 +29,15 @@ try {
 
     return renderModule(name)
   }
+
+  if (args.includes('generate:env')) {
+    const { generateEnv } = require('./templateRenderer')
+
+    const clear = args.includes('--clear')
+    const renderDev = args.includes('--dev')
+
+    generateEnv(clear, renderDev)
+  }
 } catch (error) {
   const m = chalk.red(error.message)
   console.log(`\n  ${m}\n`)

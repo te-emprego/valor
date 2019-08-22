@@ -1,0 +1,12 @@
+# app port
+PORT=3000
+
+# jwt decode token
+SECRET=
+
+# database connection string
+DATABASE_CONNECTION_STRING=
+
+# local docker-compose mongodb init credentials
+MONGO_INITDB_ROOT_USERNAME=root
+MONGO_INITDB_ROOT_PASSWORD=password
